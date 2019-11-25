@@ -7,13 +7,13 @@
 //smil-animations Chart
 
 
-  var chart = new Chartist.Line('#smil-animations', {
+var chart = new Chartist.Line('#smil-animations', {
   labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
   series: [
     [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
-    [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
-    [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
-    [3,  4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
+    [4, 5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
+    [5, 3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
+    [3, 4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
   ]
 }, {
   low: 0,
@@ -28,15 +28,15 @@ var seq = 0,
   durations = 500;
 
 // Once the chart is fully created we reset the sequence
-chart.on('created', function() {
+chart.on('created', function () {
   seq = 0;
 });
 
 // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-chart.on('draw', function(data) {
+chart.on('draw', function (data) {
   seq++;
 
-  if(data.type === 'line') {
+  if (data.type === 'line') {
     // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
     data.element.animate({
       opacity: {
@@ -50,7 +50,7 @@ chart.on('draw', function(data) {
         to: 1
       }
     });
-  } else if(data.type === 'label' && data.axis === 'x') {
+  } else if (data.type === 'label' && data.axis === 'x') {
     data.element.animate({
       y: {
         begin: seq * delays,
@@ -61,7 +61,7 @@ chart.on('draw', function(data) {
         easing: 'easeOutQuart'
       }
     });
-  } else if(data.type === 'label' && data.axis === 'y') {
+  } else if (data.type === 'label' && data.axis === 'y') {
     data.element.animate({
       x: {
         begin: seq * delays,
@@ -71,7 +71,7 @@ chart.on('draw', function(data) {
         easing: 'easeOutQuart'
       }
     });
-  } else if(data.type === 'point') {
+  } else if (data.type === 'point') {
     data.element.animate({
       x1: {
         begin: seq * delays,
@@ -95,7 +95,7 @@ chart.on('draw', function(data) {
         easing: 'easeOutQuart'
       }
     });
-  } else if(data.type === 'grid') {
+  } else if (data.type === 'grid') {
     // Using data.axis we get x or y which we can use to construct our animation definition objects
     var pos1Animation = {
       begin: seq * delays,
@@ -129,8 +129,8 @@ chart.on('draw', function(data) {
 });
 
 // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
-chart.on('created', function() {
-  if(window.__exampleAnimateTimeout) {
+chart.on('created', function () {
+  if (window.__exampleAnimateTimeout) {
     clearTimeout(window.__exampleAnimateTimeout);
     window.__exampleAnimateTimeout = null;
   }
@@ -161,26 +161,26 @@ new Chartist.Line('#simple-line-chart', {
 
 
 //Line Scatter Diagram
-var times = function(n) {
+var times = function (n) {
   return Array.apply(null, new Array(n));
 };
 
-var data = times(52).map(Math.random).reduce(function(data, rnd, index) {
+var data = times(52).map(Math.random).reduce(function (data, rnd, index) {
   data.labels.push(index + 1);
-  data.series.forEach(function(series) {
+  data.series.forEach(function (series) {
     series.push(Math.random() * 100)
   });
 
   return data;
 }, {
   labels: [],
-  series: times(4).map(function() { return new Array() })
+  series: times(4).map(function () { return new Array() })
 });
 
 var options = {
   showLine: false,
   axisX: {
-    labelInterpolationFnc: function(value, index) {
+    labelInterpolationFnc: function (value, index) {
       return index % 13 === 0 ? 'W' + value : null;
     }
   }
@@ -189,7 +189,7 @@ var options = {
 var responsiveOptions = [
   ['screen and (min-width: 640px)', {
     axisX: {
-      labelInterpolationFnc: function(value, index) {
+      labelInterpolationFnc: function (value, index) {
         return index % 4 === 0 ? 'W' + value : null;
       }
     }
@@ -217,11 +217,11 @@ new Chartist.Line('#line-chart-tooltips', {
     }
   ]
 },
-    {
-  plugins: [
-    Chartist.plugins.tooltip()
-  ]
-}
+  {
+    plugins: [
+      Chartist.plugins.tooltip()
+    ]
+  }
 );
 
 var $chart = $('#line-chart-tooltips');
@@ -231,18 +231,18 @@ var $toolTip = $chart
   .find('.tooltip')
   .hide();
 
-$chart.on('mouseenter', '.ct-point', function() {
+$chart.on('mouseenter', '.ct-point', function () {
   var $point = $(this),
     value = $point.attr('ct:value'),
     seriesName = $point.parent().attr('ct:series-name');
   $toolTip.html(seriesName + '<br>' + value).show();
 });
 
-$chart.on('mouseleave', '.ct-point', function() {
+$chart.on('mouseleave', '.ct-point', function () {
   $toolTip.hide();
 });
 
-$chart.on('mousemove', function(event) {
+$chart.on('mousemove', function (event) {
   $toolTip.css({
     left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,
     top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40
@@ -314,8 +314,8 @@ var chart = new Chartist.Line('#svg-animation', {
   fullWidth: true
 });
 
-chart.on('draw', function(data) {
-  if(data.type === 'line' || data.type === 'area') {
+chart.on('draw', function (data) {
+  if (data.type === 'line' || data.type === 'area') {
     data.element.animate({
       d: {
         begin: 2000 * data.index,
@@ -373,7 +373,7 @@ var options = {
   high: 10,
   low: -10,
   axisX: {
-    labelInterpolationFnc: function(value, index) {
+    labelInterpolationFnc: function (value, index) {
       return index % 2 === 0 ? value : null;
     }
   },
@@ -434,7 +434,7 @@ new Chartist.Bar('#multi-line-chart', {
   },
   axisY: {
     offset: 80,
-    labelInterpolationFnc: function(value) {
+    labelInterpolationFnc: function (value) {
       return value + ' CHF'
     },
     scaleMinSpace: 15
@@ -459,15 +459,15 @@ new Chartist.Bar('#stacked-bar-chart', {
 }, {
   stackBars: true,
   axisY: {
-    labelInterpolationFnc: function(value) {
+    labelInterpolationFnc: function (value) {
       return (value / 1000) + 'k';
     }
   },
   plugins: [
     Chartist.plugins.tooltip()
   ]
-}).on('draw', function(data) {
-  if(data.type === 'bar') {
+}).on('draw', function (data) {
+  if (data.type === 'bar') {
     data.element.attr({
       style: 'stroke-width: 30px'
     });
@@ -518,8 +518,8 @@ new Chartist.Bar('#extreme-chart', {
   // Default mobile configuration
   stackBars: true,
   axisX: {
-    labelInterpolationFnc: function(value) {
-      return value.split(/\s+/).map(function(word) {
+    labelInterpolationFnc: function (value) {
+      return value.split(/\s+/).map(function (word) {
         return word[0];
       }).join('');
     }
@@ -610,8 +610,8 @@ var chart = new Chartist.Pie('#animating-donut', {
   ]
 });
 
-chart.on('draw', function(data) {
-  if(data.type === 'slice') {
+chart.on('draw', function (data) {
+  if (data.type === 'slice') {
     // Get the total path length in order to use for dash array animation
     var pathLength = data.element._node.getTotalLength();
 
@@ -626,7 +626,7 @@ chart.on('draw', function(data) {
         id: 'anim' + data.index,
         dur: 1000,
         from: -pathLength + 'px',
-        to:  '0px',
+        to: '0px',
         easing: Chartist.Svg.Easing.easeOutQuint,
         // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
         fill: 'freeze'
@@ -634,7 +634,7 @@ chart.on('draw', function(data) {
     };
 
     // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
-    if(data.index !== 0) {
+    if (data.index !== 0) {
       animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
     }
 
@@ -650,8 +650,8 @@ chart.on('draw', function(data) {
 });
 
 // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-chart.on('created', function() {
-  if(window.__anim21278907124) {
+chart.on('created', function () {
+  if (window.__anim21278907124) {
     clearTimeout(window.__anim21278907124);
     window.__anim21278907124 = null;
   }
@@ -667,10 +667,10 @@ var data = {
   series: [5, 3, 4]
 };
 
-var sum = function(a, b) { return a + b };
+var sum = function (a, b) { return a + b };
 
 new Chartist.Pie('#simple-pie', data, {
-  labelInterpolationFnc: function(value) {
+  labelInterpolationFnc: function (value) {
     return Math.round(value / data.series.reduce(sum) * 100) + '%';
   }
 });
@@ -686,7 +686,7 @@ var data = {
 };
 
 var options = {
-  labelInterpolationFnc: function(value) {
+  labelInterpolationFnc: function (value) {
     return value[0]
   }
 };
@@ -696,7 +696,7 @@ var responsiveOptions = [
     chartPadding: 30,
     labelOffset: 100,
     labelDirection: 'explode',
-    labelInterpolationFnc: function(value) {
+    labelInterpolationFnc: function (value) {
       return value;
     }
   }],
@@ -815,13 +815,13 @@ var chart = new Chartist.Line('#svg-dot-animation', {
 var seq = 0;
 
 // Once the chart is fully created we reset the sequence
-chart.on('created', function() {
+chart.on('created', function () {
   seq = 0;
 });
 
 // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-chart.on('draw', function(data) {
-  if(data.type === 'point') {
+chart.on('draw', function (data) {
+  if (data.type === 'point') {
     // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
     data.element.animate({
       opacity: {
@@ -847,8 +847,8 @@ chart.on('draw', function(data) {
 });
 
 // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
-chart.on('created', function() {
-  if(window.__anim0987432598723) {
+chart.on('created', function () {
+  if (window.__anim0987432598723) {
     clearTimeout(window.__anim0987432598723);
     window.__anim0987432598723 = null;
   }

@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+
+{% block charts_css %}
+<!--Chartist Chart CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist/dist/chartist.min.css')}}">
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title">Welcome, {{ current_user.first_name + " " + current_user.last_name }}</h4>
+        <p>Today is {{today}}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+
+    </div><!-- end col-->
+
+    <div class="col-lg-6">
+        <!-- <div class="card-box"> -->
+        <h4 class="header-title m-t-0 m-b-30">This Week summary</h4>
+
+        <div id="chart-with-area" class="ct-chart ct-golden-section"></div>
+        <!-- </div> -->
+
+    </div><!-- end col-->
+</div>
+<!-- end row -->
+{% endblock %}
+
+{% block chart_js %}
+<!--Chartist Chart-->
+<script src="{{ url_for('static', filename='assets/plugins/chartist/dist/chartist.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/plugins/chartist/dist/chartist-plugin-tooltip.min.js')}}"></script>
+<!-- <script src="{{ url_for('static', filename='assets/pages/jquery.chartist.init.js')}}"></script> -->
+<script src="{{ url_for('static', filename='assets/pages/jquery.chartist.custom.init.js')}}"></script>
+{% endblock %}

@@ -24,9 +24,9 @@ def sign_in():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            if user.get_role() == "Admin":
-                next_page = '/admin/dashboard'
-            return redirect(next_page) if next_page else redirect(url_for('users.users_dashboard'))
+            # if user.get_role() == "Admin":
+            #     next_page = '/admin/dashboard'
+            return redirect(next_page) if next_page else redirect(url_for('users.user_dashboard'))
         else:
             flash("Invalid credentials", 'danger')
     return render_template('auth/sign-in.html', form=form)
