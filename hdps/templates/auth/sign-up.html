@@ -1,0 +1,123 @@
+{% extends 'layouts/auth_base.html' %}
+{% block content %}
+<!-- card-box -->
+<div class="m-t-40 card-box">
+    <div class="text-center">
+        <h4 class="text-uppercase font-bold m-b-0">Register</h4>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal m-t-20" action="" method="POST">
+            {{ form.hidden_tag()}}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            {% if form.first_name.errors %}
+                            {{ form.first_name(class="form-control parsley-error", placeholder="First name") }}
+                            <div>
+                                {% for error in form.first_name.errors %}
+                                <span class="small text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.first_name(class="form-control ", placeholder="First name") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            {% if form.last_name.errors %}
+                            {{ form.last_name(class="form-control parsley-error", placeholder="Last name") }}
+                            <div>
+                                {% for error in form.last_name.errors %}
+                                <span class="small text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.last_name(class="form-control ", placeholder="Last name") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control parsley-error", placeholder="Email address") }}
+                    <div>
+                        {% for error in form.email.errors %}
+                        <span class="small text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control ", placeholder="Email address") }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                {% for subfield in form.user_type %}
+                <div class="col-sm-6 ">
+                    <div class="form-group ">
+                        <div class="col-xs-12 ">
+                            <div class="radio radio-custom">
+                                {{ subfield(class="") }}
+                                {{ subfield.label(class="") }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    {% if form.password.errors %}
+                    {{ form.password(class="form-control parsley-error", placeholder="Password") }}
+                    <div>
+                        {% for error in form.password.errors %}
+                        <span class="small text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="form-control ", placeholder="Password") }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="form-control parsley-error", placeholder="Password") }}
+                    <div>
+                        {% for error in form.confirm_password.errors %}
+                        <span class="small text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.confirm_password(class="form-control ", placeholder="Confirm password") }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group text-center m-t-40">
+                <div class="col-xs-12">
+                    {{ form.submit(class="btn btn-custom btn-bordred btn-block waves-light")}}
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<!-- end card-box -->
+
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <p class="text-muted">Already have account?<a href="{{ url_for('auth.sign_in')}}"
+                class="text-primary m-l-5"><b>Sign
+                    In</b></a></p>
+    </div>
+</div>
+
+</div>
+{% endblock %}
