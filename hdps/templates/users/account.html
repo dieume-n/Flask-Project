@@ -1,0 +1,248 @@
+{% extends 'layouts/base.html' %}
+
+{% block charts_css %}
+<!-- form Uploads -->
+<link href="{{ url_for('static', filename='assets/plugins/fileuploads/css/dropify.min.css')}}" rel="stylesheet"
+    type="text/css" />
+{% endblock %}
+
+{% block content %}
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title">Profile</h4>
+        {% include 'partials/flash.html' %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="card-box">
+            <h4 class="header-title m-t-0 m-b-30">Personal Information</h4>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% if current_user.get_role() != 'Mobile' %}
+                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                                {{ form.hidden_tag()}}
+                                <div class="form-group ">
+                                    {{ form.first_name.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.first_name.errors %}
+                                        {{ form.first_name(class="form-control parsley-error", placeholder="First name") }}
+                                        <div>
+                                            {% for error in form.first_name.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.first_name(class="form-control ", placeholder="First name") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.last_name.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.last_name.errors %}
+                                        {{ form.last_name(class="form-control parsley-error", placeholder="Last name") }}
+                                        <div>
+                                            {% for error in form.last_name.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.last_name(class="form-control ", placeholder="Last name") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.email.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.email.errors %}
+                                        {{ form.email(class="form-control parsley-error", placeholder="Email Address") }}
+                                        <div>
+                                            {% for error in form.email.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.email(class="form-control ", placeholder="Email address") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.picture.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.picture.errors %}
+                                        {{ form.picture(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.picture.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.picture(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        {{ form.submit(class="btn btn-info btn-bordred waves-light")}}
+                                    </div>
+                                </div>
+                            </form>
+                            {% else %}
+                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                                {{ form.hidden_tag()}}
+                                <div class="form-group ">
+                                    {{ form.first_name.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.first_name.errors %}
+                                        {{ form.first_name(class="form-control parsley-error", placeholder="First name") }}
+                                        <div>
+                                            {% for error in form.first_name.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.first_name(class="form-control ", placeholder="First name") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.last_name.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.last_name.errors %}
+                                        {{ form.last_name(class="form-control parsley-error", placeholder="Last name") }}
+                                        <div>
+                                            {% for error in form.last_name.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.last_name(class="form-control ", placeholder="Last name") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.email.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.email.errors %}
+                                        {{ form.email(class="form-control parsley-error", placeholder="Email Address") }}
+                                        <div>
+                                            {% for error in form.email.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.email(class="form-control ", placeholder="Email address") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.height.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.height.errors %}
+                                        {{ form.height(class="form-control parsley-error", placeholder="Height") }}
+                                        <div>
+                                            {% for error in form.height.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.height(class="form-control ", placeholder="Height") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.weight.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.weight.errors %}
+                                        {{ form.weight(class="form-control parsley-error", placeholder="Weight") }}
+                                        <div>
+                                            {% for error in form.weight.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.weight(class="form-control ", placeholder="Weight") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.picture.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.picture.errors %}
+                                        {{ form.picture(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.picture.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.picture(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        {{ form.submit(class="btn btn-info btn-bordred waves-light")}}
+                                    </div>
+                                </div>
+                            </form>
+                            {% endif %}
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+
+        <div class="bg-picture card-box">
+            <div class="profile-info-name">
+                <img src="{{ url_for('static', filename='images/profile/'+ current_user.image_file)}}"
+                    class="img-thumbnail" alt="profile-image">
+
+                <div class="profile-info-detail">
+                    <h3 class="m-t-0 m-b-0">{{ current_user.first_name + " " + current_user.last_name }}</h3>
+                    <p class="text-muted m-b-20"><i>{{ current_user.get_role() }}</i></p>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!--/ meta -->
+    </div>
+</div>
+<!-- end row -->
+
+{% endblock %}
+{% block chart_js%}
+<!-- file uploads js -->
+<script src="{{ url_for('static', filename='assets/plugins/fileuploads/js/dropify.js')}}"></script>
+{% endblock %}
+
+{% block custom_scripts %}
+<script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove': 'Remove',
+            'error': 'Ooops, something wrong appended.'
+        },
+        error: {
+            'fileSize': 'The file size is too big (1M max).',
+            'imageFormat': 'The image format is not allowed ({{value}} only).'
+        }
+    });
+</script>
+{% endblock%}

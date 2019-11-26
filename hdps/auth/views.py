@@ -8,7 +8,6 @@ auth = Blueprint('auth', __name__)
 
 
 @auth.route('/sign-out')
-@login_required
 def sign_out():
     logout_user()
     return redirect(url_for('pages.home'))
@@ -24,8 +23,8 @@ def sign_in():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            # if user.get_role() == "Admin":
-            #     next_page = '/admin/dashboard'
+            if user.is_admin():
+                next_page = '/admin/dashboard'
             return redirect(next_page) if next_page else redirect(url_for('users.user_dashboard'))
         else:
             flash("Invalid credentials", 'danger')
