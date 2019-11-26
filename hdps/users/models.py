@@ -52,8 +52,17 @@ class User(db.Model, UserMixin):
         else:
             return False
 
+    def is_medical(self):
+        if self.user_type == "Doctor" or self.user_type == "Nurse":
+            return True
+        else:
+            return False
+
     def get_user_data(self):
         return self.user_data
+
+    def get_user_activity(self):
+        return self.user_activity
 
 
 class UserData(db.Model):
@@ -80,4 +89,5 @@ class UserActivity(db.Model):
     distance = db.Column(db.Float)
     is_sync = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.Date, default=date.today)
+    day_of_the_week = db.Column(db.String(20))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

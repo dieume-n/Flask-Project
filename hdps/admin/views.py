@@ -25,9 +25,3 @@ def admin_dashboard():
 def users_list():
     users = User.query.all()
     return render_template('admin/users-list.html', users=users)
-
-
-@admin.route('/admin/patients-list')
-def patients_list():
-    patients = Patient.query.all()
-    return render_template('admin/patients-list.html', patients=patients)

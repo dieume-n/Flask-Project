@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %}
+
+{% block charts_css %}
+<!-- DataTables -->
+<link href="{{ url_for('static', filename='assets/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ url_for('static', filename='assets/plugins/datatables/buttons.bootstrap.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ url_for('static', filename='assets/plugins/datatables/fixedHeader.bootstrap.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ url_for('static', filename='assets/plugins/datatables/responsive.bootstrap.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ url_for('static', filename='assets/plugins/datatables/scroller.bootstrap.min.css')}}" rel="stylesheet"
+    type="text/css" />
+{% endblock %}
+
+
+{% block content %}
+{% include 'partials/add_patient.html' %}
+
+<!-- end row -->
+{% endblock %}
+
+{% block chart_js %}
+<!-- Form wizard -->
+<script src="{{ url_for('static', filename='assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/plugins/jquery-validation/dist/jquery.validate.min.js')}}"></script>
+
+{% endblock %}
+
+
+{% block custom_scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#basicwizard').bootstrapWizard({ 'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted' });
+
+        $('#progressbarwizard').bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#progressbarwizard').find('.bar').css({ width: $percent + '%' });
+            },
+            'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted'
+        });
+
+        $('#btnwizard').bootstrapWizard({ 'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted', 'nextSelector': '.button-next', 'previousSelector': '.button-previous', 'firstSelector': '.button-first', 'lastSelector': '.button-last' });
+
+        var $validator = $("#commentForm").validate({
+            rules: {
+                emailfield: {
+                    required: true,
+                    email: true,
+                    minlength: 3
+                },
+                namefield: {
+                    required: true,
+                    minlength: 3
+                },
+                urlfield: {
+                    required: true,
+                    minlength: 3,
+                    url: true
+                }
+            }
+        });
+
+        $('#rootwizard').bootstrapWizard({
+            'tabClass': 'nav nav-tabs navtab-wizard nav-justified bg-muted',
+            'onNext': function (tab, navigation, index) {
+                var $valid = $("#commentForm").valid();
+                if (!$valid) {
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

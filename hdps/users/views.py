@@ -4,8 +4,9 @@ from flask import Blueprint, redirect, render_template, url_for, request, flash,
 from flask_login import login_required, current_user
 from hdps import db
 from hdps.users.forms import UserAccountForm, MobileAccountForm
-from hdps.users.models import User
+from hdps.users.models import User, UserActivity
 from hdps.users.utils import save_picture
+from hdps.patients.models import Patient
 
 users = Blueprint('users', __name__)
 
@@ -14,8 +15,9 @@ users = Blueprint('users', __name__)
 @login_required
 def user_dashboard():
     today = date.today().strftime("%B %d, %Y")
-    # return render_template('users/users-dashboard.html', today=today)
-    return render_template('users/dashboard.html', today=today)
+    data = current_user.get_user_activity()
+
+    return render_template('users/dashboard.html', today=today, data=data)
 
 
 @users.route('/users/account', methods=['GET', 'POST'])

@@ -1,0 +1,258 @@
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title">Profile</h4>
+        {% include 'partials/flash.html' %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <h4 class="header-title m-t-0 m-b-30">Personal Information</h4>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="form-horizontal" role="form" method="POST">
+                                {{ form.hidden_tag()}}
+                                <div class="form-group ">
+                                    {{ form.name.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.name.errors %}
+                                        {{ form.name(class="form-control parsley-error", placeholder="First name") }}
+                                        <div>
+                                            {% for error in form.name.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.name(class="form-control ", placeholder="First name") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.gender.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            {% for subfield in form.gender %}
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group ">
+                                                    <div class="col-xs-12 ">
+                                                        <div class="radio radio-custom">
+                                                            {{ subfield(class="") }}
+                                                            {{ subfield.label(class="") }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.date_of_birth.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            {% if form.date_of_birth.errors %}
+                                            {{ form.date_of_birth(class="form-control parsley-error", placeholder="Last name", id="datepicker-autoclose") }}
+                                            <span class="input-group-addon bg-primary b-0 text-white"><i
+                                                    class="ti-calendar"></i></span>
+                                            <div>
+                                                {% for error in form.date_of_birth.errors %}
+                                                <span class="small text-danger">{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                            {{ form.date_of_birth(class="form-control ", placeholder="Last name", id="datepicker-autoclose") }}
+                                            <span class="input-group-addon bg-primary b-0 text-white"><i
+                                                    class="ti-calendar"></i></span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.chest_pain.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.chest_pain.errors %}
+                                        {{ form.chest_pain(class="form-control parsley-error", placeholder="Email Address") }}
+                                        <div>
+                                            {% for error in form.chest_pain.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.chest_pain(class="form-control ", placeholder="Email address") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.trestbps.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.trestbps.errors %}
+                                        {{ form.trestbps(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.trestbps.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.trestbps(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.chol.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.chol.errors %}
+                                        {{ form.chol(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.chol.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.chol(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.fbs.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.fbs.errors %}
+                                        {{ form.fbs(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.fbs.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.fbs(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.restecg.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.restecg.errors %}
+                                        {{ form.restecg(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.restecg.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.restecg(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.thalach.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.thalach.errors %}
+                                        {{ form.thalach(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.thalach.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.thalach(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.exang.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.exang.errors %}
+                                        {{ form.exang(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.exang.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.exang(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.oldpeak.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.oldpeak.errors %}
+                                        {{ form.oldpeak(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.oldpeak.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.oldpeak(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.slope.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.slope.errors %}
+                                        {{ form.slope(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.slope.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.slope(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.ca.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.ca.errors %}
+                                        {{ form.ca(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.ca.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.ca(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.that.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.that.errors %}
+                                        {{ form.that(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.that.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.that(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        {{ form.submit(class="btn btn-success btn-bordred waves-light")}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+
+                </div><!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+</div>
+<!-- end row -->

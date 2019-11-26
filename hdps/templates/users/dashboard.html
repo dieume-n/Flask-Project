@@ -13,9 +13,10 @@
         <p>Today is {{today}}</p>
     </div>
 </div>
-
+{% if current_user.is_mobile() %}
 <div class="row">
     <div class="col-lg-6">
+        <h6>{{ data.steps }}</h6>
 
     </div><!-- end col-->
 
@@ -28,6 +29,7 @@
 
     </div><!-- end col-->
 </div>
+{% endif %}
 <!-- end row -->
 {% endblock %}
 

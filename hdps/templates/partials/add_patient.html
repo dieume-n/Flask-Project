@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title">New Patient</h4>
+    </div>
+</div>
+
+<!-- PROGRESSBAR WIZARD -->
+<div class="">
+    <div class="card-box p-b-0">
+        <div class="dropdown pull-right">
+            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                <i class="zmdi zmdi-more-vert"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>
+
+        <h4 class="header-title m-t-0 m-b-30"></h4>
+
+        <div id="progressbarwizard" class="pull-in">
+            <ul>
+                <li><a href="#account-2" data-toggle="tab">Personal Details</a></li>
+                <li><a href="#profile-tab-2" data-toggle="tab">Medical Data</a></li>
+                <!-- <li><a href="#finish-2" data-toggle="tab">Finish</a></li> -->
+            </ul>
+
+            <div class="tab-content b-0 m-b-0">
+
+                <div id="bar" class="progress progress-striped progress-bar-primary-alt active">
+                    <div class="bar progress-bar progress-bar-primary"></div>
+                </div>
+
+                <div class="tab-pane p-t-10 fade" id="account-2">
+                    <div class="row">
+                        <div class="form-group clearfix">
+                            <label class="col-md-3 control-label " for="userName1">Name *</label>
+                            <div class="col-md-9">
+                                <input class="form-control required" id="userName1" name="userName" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-md-3 control-label " for="password1"> Date Of birth *</label>
+                            <div class="col-md-9">
+                                <input id="password1" name="password" type="text" class="required form-control">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group clearfix">
+                            <label class="col-md-3 control-label " for="confirm1">Confirm Password *</label>
+                            <div class="col-md-9">
+                                <input id="confirm1" name="confirm" type="text" class="required form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane p-t-10 fade" id="profile-tab-2">
+                    <div class="row">
+                        <div class="form-group clearfix">
+                            <label class="col-lg-2 control-label" for="name1"> First name *</label>
+                            <div class="col-lg-10">
+                                <input id="name1" name="name" type="text" class="required form-control">
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-lg-2 control-label " for="surname1"> Last name *</label>
+                            <div class="col-lg-10">
+                                <input id="surname1" name="surname" type="text" class="required form-control">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group clearfix">
+                            <label class="col-lg-2 control-label " for="email1">Email *</label>
+                            <div class="col-lg-10">
+                                <input id="email1" name="email" type="text" class="required email form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <ul class="pager m-b-0 wizard">
+                    <li class="previous first" style="display:none;"><a href="#">First</a>
+                    </li>
+                    <li class="previous"><a href="#" class="btn btn-primary waves-effect waves-light">Previous</a>
+                    </li>
+                    <li class="next last" style="display:none;"><a href="#">Last</a></li>
+                    <li class="next"><a href="#" class="btn btn-primary waves-effect waves-light">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end col -->

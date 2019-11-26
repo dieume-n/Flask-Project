@@ -71,15 +71,21 @@
                     {% if not current_user.is_mobile() %}
                     <li class="has-submenu">
                         {% if current_user.is_admin() %}
-                        <a href="{{ url_for('admin.patients_list')}}"><i class="zmdi zmdi-invert-colors"></i> <span>
+                        <a href="{{ url_for('patients.patients_list')}}"><i class="zmdi zmdi-invert-colors"></i> <span>
                                 Patients </span> </a>
                         {% else %}
-                        <a href=""><i class="zmdi zmdi-invert-colors"></i> <span> Patients </span> </a>
+                        <a href="#"><i class="zmdi zmdi-invert-colors"></i> <span>
+                                Patients </span> </a>
+                        <ul class="submenu">
+                            <li><a href="{{url_for('patients.patients_list')}}">List of Patients</a></li>
+                            <li><a href="form-advanced.html">New Patient</a></li>
+                        </ul>
                         {% endif %}
+
                     </li>
                     {% endif %}
 
-                    <li class="has-submenu">
+                    <!-- <li class="has-submenu">
                         <a href="#"><i class="zmdi zmdi-collection-text"></i><span> Forms </span> </a>
                         <ul class="submenu">
                             <li><a href="form-elements.html">General Elements</a></li>
@@ -157,7 +163,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                 </ul>
                 <!-- End navigation menu  -->
