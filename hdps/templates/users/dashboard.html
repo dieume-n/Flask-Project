@@ -14,9 +14,15 @@
     </div>
 </div>
 {% if current_user.is_mobile() %}
-<div class="row">
+<div class="row card-box">
     <div class="col-lg-6">
-        <h6>{{ data.steps }}</h6>
+        <div class="row">
+            <div class="col-sm-12 mx-auto mt-5">
+                <h1 class="display-1" id="step">0</h1>
+                <h3 class="text-muted">Total steps since registration</h3>
+            </div>
+        </div>
+
 
     </div><!-- end col-->
 
@@ -38,5 +44,38 @@
 <script src="{{ url_for('static', filename='assets/plugins/chartist/dist/chartist.min.js')}}"></script>
 <script src="{{ url_for('static', filename='assets/plugins/chartist/dist/chartist-plugin-tooltip.min.js')}}"></script>
 <!-- <script src="{{ url_for('static', filename='assets/pages/jquery.chartist.init.js')}}"></script> -->
-<script src="{{ url_for('static', filename='assets/pages/jquery.chartist.custom.init.js')}}"></script>
+<!-- <script src="{{ url_for('static', filename='assets/pages/jquery.chartist.custom.init.js')}}"></script> -->
+{% endblock %}
+
+{% block custom_scripts %}
+<script>
+    var activities = {{ activities | tojson}};
+    console.log(activities);
+    var daysOftheWeek = [];
+    var data = [];
+
+    activities.forEach(element => {
+        daysOftheWeek.push(element.day_of_the_week);
+        data.push(element.steps)
+    });
+    var totalSteps = data.reduce((a, b) => a + b, 0)
+
+    new Chartist.Line('#chart-with-area', {
+        labels: daysOftheWeek,
+        series: [
+            data
+        ]
+    }, {
+        low: 0,
+        showArea: true,
+        lineSmooth: Chartist.Interpolation.simple({
+            divisor: 2,
+            fillHoles: false
+        }),
+        plugins: [
+            Chartist.plugins.tooltip()
+        ]
+    });
+    $('#step').text(totalSteps);
+</script>
 {% endblock %}

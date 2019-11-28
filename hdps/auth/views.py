@@ -16,7 +16,9 @@ def sign_out():
 @auth.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
     if current_user.is_authenticated:
-        return redirect(url_for('users.users_dashboard'))
+        if current_user.is_admin():
+            return redirect(url_for('admin.dashboard'))
+        return redirect(url_for('users.user_dashboard'))
     form = SignInForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()

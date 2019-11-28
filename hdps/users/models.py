@@ -1,7 +1,7 @@
 from datetime import datetime, date
 import uuid
 from flask_login import UserMixin
-from hdps import db, bcrypt, login_manager
+from hdps import db, bcrypt, login_manager, ma
 
 
 @login_manager.user_loader
@@ -52,6 +52,12 @@ class User(db.Model, UserMixin):
         else:
             return False
 
+    def is_nurse(self):
+        if self.user_type == "Nurse":
+            return True
+        else:
+            return False
+
     def is_medical(self):
         if self.user_type == "Doctor" or self.user_type == "Nurse":
             return True
@@ -72,13 +78,12 @@ class UserData(db.Model):
     weight = db.Column(db.Float)
     gender = db.Column(db.String(10))
     ap_hi = db.Column(db.Integer)
-    ap_low = db.Column(db.Integer)
+    ap_lo = db.Column(db.Integer)
     cholesterol = db.Column(db.Integer)
     gluc = db.Column(db.Integer)
     smoke = db.Column(db.Boolean)
     alco = db.Column(db.Boolean)
     active = db.Column(db.Boolean, default=False)
-    smoke = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
 
 
@@ -91,3 +96,22 @@ class UserActivity(db.Model):
     created_at = db.Column(db.Date, default=date.today)
     day_of_the_week = db.Column(db.String(20))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('first_name', 'last_name', 'public_id', 'email',
+                  'user_type', 'image_file', 'user_data', 'user_activity')
+
+
+class UserActivitySchema(ma.Schema):
+    class Meta:
+        fields = ('steps', 'cal', 'distance', 'is_sync',
+                  'day_of_the_week')
+
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
+
+user_activity_schema = UserActivitySchema()
+users_activities_schema = UserActivitySchema(many=True)

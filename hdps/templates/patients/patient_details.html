@@ -11,7 +11,7 @@
 <!-- Page-Title -->
 <div class="row">
     <div class="col-sm-12">
-        <h4 class="page-title">Profile</h4>
+        <h4 class="page-title">Patient Details</h4>
         {% include 'partials/flash.html' %}
     </div>
 </div>
@@ -19,6 +19,11 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-box">
+            {% if not current_user.is_nurse() %}
+            <div class="pull-right">
+                <a href="{{ url_for('patients.patients_prediction', patient_id=id)}}" class="btn btn-info">Predict</a>
+            </div>
+            {% endif %}
             <h4 class="header-title m-t-0 m-b-30">Personal Information</h4>
             <div class="row">
                 <div class="col-sm-12">
@@ -276,6 +281,21 @@
                                         </div>
                                         {% else %}
                                         {{ form.that(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.heart_disease.label(class="col-sm-3 control-label disabled") }}
+                                    <div class="col-sm-9">
+                                        {% if form.heart_disease.errors %}
+                                        {{ form.heart_disease(class="form-control parsley-error dropify", data_allowed_file_extensions="jpeg png jpg") }}
+                                        <div>
+                                            {% for error in form.heart_disease.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.heart_disease(class="form-control dropify",data_max_file_size="1M", data_allowed_file_extensions="jpeg png jpg") }}
                                         {% endif %}
                                     </div>
                                 </div>

@@ -1,6 +1,10 @@
 {% extends 'layouts/base.html' %}
 
 {% block charts_css %}
+<!-- Plugins css-->
+<link
+    href="{{ url_for('static', filename='assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.c')}}ss"
+    rel="stylesheet">
 <!-- form Uploads -->
 <link href="{{ url_for('static', filename='assets/plugins/fileuploads/css/dropify.min.css')}}" rel="stylesheet"
     type="text/css" />
@@ -129,6 +133,47 @@
                                     </div>
                                 </div>
                                 <div class="form-group ">
+                                    {{ form.gender.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            {% for subfield in form.gender %}
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group ">
+                                                    <div class="col-xs-12 ">
+                                                        <div class="radio radio-custom">
+                                                            {{ subfield(class="") }}
+                                                            {{ subfield.label(class="") }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.date_of_birth.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            {% if form.date_of_birth.errors %}
+                                            {{ form.date_of_birth(class="form-control parsley-error", placeholder="1999-12-01", id="datepicker-autoclose") }}
+                                            <span class="input-group-addon bg-primary b-0 text-white"><i
+                                                    class="ti-calendar"></i></span>
+                                            <div>
+                                                {% for error in form.date_of_birth.errors %}
+                                                <span class="small text-danger">{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                            {{ form.date_of_birth(class="form-control ", placeholder="1999-12-01", id="datepicker-autoclose") }}
+                                            <span class="input-group-addon bg-primary b-0 text-white"><i
+                                                    class="ti-calendar"></i></span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
                                     {{ form.email.label(class="col-sm-3 control-label") }}
                                     <div class="col-sm-9">
                                         {% if form.email.errors %}
@@ -171,6 +216,106 @@
                                         {% else %}
                                         {{ form.weight(class="form-control ", placeholder="Weight") }}
                                         {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.ap_lo.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.ap_lo.errors %}
+                                        {{ form.ap_lo(class="form-control parsley-error", placeholder="Diastolic blood pressure") }}
+                                        <div>
+                                            {% for error in form.ap_lo.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.ap_lo(class="form-control ", placeholder="Diastolic blood pressure") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.ap_hi.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.ap_hi.errors %}
+                                        {{ form.ap_hi(class="form-control parsley-error", placeholder="Systolic blood pressure") }}
+                                        <div>
+                                            {% for error in form.ap_hi.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.ap_hi(class="form-control ", placeholder="Systolic blood pressure") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.cholesterol.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.cholesterol.errors %}
+                                        {{ form.cholesterol(class="form-control parsley-error", placeholder="Cholesterol") }}
+                                        <div>
+                                            {% for error in form.cholesterol.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.cholesterol(class="form-control ", placeholder="Cholesterol") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.glucose.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        {% if form.glucose.errors %}
+                                        {{ form.glucose(class="form-control parsley-error", placeholder="Glucose") }}
+                                        <div>
+                                            {% for error in form.glucose.errors %}
+                                            <span class="small text-danger">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.glucose(class="form-control ", placeholder="Glucose") }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.smoke.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            {% for subfield in form.smoke %}
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group ">
+                                                    <div class="col-xs-12 ">
+                                                        <div class="radio radio-custom">
+                                                            {{ subfield(class="") }}
+                                                            {{ subfield.label(class="") }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    {{ form.alcohol.label(class="col-sm-3 control-label") }}
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            {% for subfield in form.alcohol %}
+                                            <div class="col-sm-6 ">
+                                                <div class="form-group ">
+                                                    <div class="col-xs-12 ">
+                                                        <div class="radio radio-custom">
+                                                            {{ subfield(class="") }}
+                                                            {{ subfield.label(class="") }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -226,8 +371,12 @@
 
 {% endblock %}
 {% block chart_js%}
+<!-- Plugins Js -->
+<script
+    src="{{ url_for('static', filename='assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- file uploads js -->
 <script src="{{ url_for('static', filename='assets/plugins/fileuploads/js/dropify.js')}}"></script>
+
 {% endblock %}
 
 {% block custom_scripts %}
@@ -243,6 +392,14 @@
             'fileSize': 'The file size is too big (1M max).',
             'imageFormat': 'The image format is not allowed ({{value}} only).'
         }
+    });
+
+    // Date Picker
+    jQuery('#datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
     });
 </script>
 {% endblock%}

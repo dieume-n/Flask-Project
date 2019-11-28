@@ -2,6 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h4 class="page-title">List of Patients</h4>
+        {% include 'partials/flash.html' %}
     </div>
 </div>
 <div class="row">
@@ -15,6 +16,10 @@
                         <th>Height</th>
                         <th>Weight</th>
                         <th>BMI</th>
+                        <th>Added Date</th>
+                        {% if not current_user.is_nurse() %}
+                        <th>Heart Disease</th>
+                        {% endif %}
                     </tr>
                 </thead>
 
@@ -24,10 +29,21 @@
                         <td><a
                                 href="{{ url_for('patients.patients_details', patient_id=patient.id)}}">{{ patient.name}}</a>
                         </td>
-                        <td>{{ patient.date_of_birth}}</td>
+                        <td>{{ calculate_age(patient.date_of_birth) }}</td>
                         <td>{{ patient.height}}</td>
                         <td>{{ patient.weight}}</td>
-                        <td>23</td>
+                        <td>{{ calculate_bmi(patient.weight, patient.height)}}</td>
+                        <td>{{ patient.created_at.date() }}</td>
+                        {% if not current_user.is_nurse() %}
+                        {% if patient.prediction == 1 %}
+                        <td><span class="label label-danger">Yes</span></td>
+                        {% elif patient.prediction == 0 %}
+                        <td><span class="label label-sucess">No</span></td>
+                        {% else %}
+                        <td><span class=""></span></td>
+                        {% endif %}
+                        {% endif%}
+
                     </tr>
                     {% endfor %}
                 </tbody>

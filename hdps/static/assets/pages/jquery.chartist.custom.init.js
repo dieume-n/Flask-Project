@@ -1,3 +1,6 @@
+var activities = {{ activities | tojson}}
+console.log(activities)
+
 new Chartist.Line('#chart-with-area', {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     series: [

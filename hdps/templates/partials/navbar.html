@@ -64,21 +64,21 @@
                     </li>
                     {% if current_user.is_admin() %}
                     <li class="has-submenu">
-                        <a href="{{ url_for('admin.users_list')}}"><i class="zmdi zmdi-invert-colors"></i> <span> Users
+                        <a href="{{ url_for('admin.users_list')}}"><i class="fa fa-users"></i> <span> Users
                             </span> </a>
                     </li>
                     {% endif %}
                     {% if not current_user.is_mobile() %}
                     <li class="has-submenu">
                         {% if current_user.is_admin() %}
-                        <a href="{{ url_for('patients.patients_list')}}"><i class="zmdi zmdi-invert-colors"></i> <span>
+                        <a href="{{ url_for('patients.patients_list')}}"><i class="zmdi zmdi-local-hospital"></i> <span>
                                 Patients </span> </a>
                         {% else %}
-                        <a href="#"><i class="zmdi zmdi-invert-colors"></i> <span>
+                        <a href="#"><i class="zmdi zmdi-local-hospital"></i> <span>
                                 Patients </span> </a>
                         <ul class="submenu">
                             <li><a href="{{url_for('patients.patients_list')}}">List of Patients</a></li>
-                            <li><a href="form-advanced.html">New Patient</a></li>
+                            <li><a href="{{url_for('patients.add_patient')}}">New Patient</a></li>
                         </ul>
                         {% endif %}
 

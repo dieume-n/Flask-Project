@@ -1,16 +1,22 @@
-from flask import Flask
-from hdps.config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_marshmallow import Marshmallow
 from flask_compress import Compress
+from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
+from hdps.config import Config
+from flask import Flask
+from datetime import date
+import os
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 compress = Compress()
+ma = Marshmallow()
 login_manager = LoginManager()
 login_manager.login_message_category = "info"
 login_manager.login_view = "auth.sign_in"
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 def create_app():
@@ -21,18 +27,31 @@ def create_app():
     bcrypt.init_app(app)
     login_manager.init_app(app)
     compress.init_app(app)
+    ma.init_app(app)
+
+    @app.context_processor
+    def utility_processor():
+        def calculate_age(born):
+            today = date.today()
+            return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+        def calculate_bmi(weight, height):
+            return round((weight / height/height)*10000, 2)
+        return dict(calculate_age=calculate_age, calculate_bmi=calculate_bmi)
 
     from hdps.pages.views import pages
     from hdps.users.views import users
     from hdps.auth.views import auth
     from hdps.admin.views import admin
     from hdps.patients.views import patients
+    from hdps.api import api
 
     app.register_blueprint(pages)
     app.register_blueprint(users)
     app.register_blueprint(auth)
     app.register_blueprint(admin)
     app.register_blueprint(patients)
+    app.register_blueprint(api, url_prefix='/api')
 
     return app
 
